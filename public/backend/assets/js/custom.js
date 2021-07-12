@@ -312,6 +312,10 @@
 
 
 
+        CKEDITOR.replace( 'content' );
+        $('.selectdata').select2();
+
+
 
 
 

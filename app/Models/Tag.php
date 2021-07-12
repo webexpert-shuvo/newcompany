@@ -11,5 +11,12 @@ class Tag extends Model
 
     protected $guarded =[];
 
+    //Posts
+    public function post()
+    {
+        return $this -> belongsToMany('App\Models\Post');
+    }
+
+
 
 }

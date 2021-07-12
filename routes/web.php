@@ -49,6 +49,10 @@ Auth::routes();
          Route::post('/tag-edit/{id}', [App\Http\Controllers\TagController::class , 'tagUpdate'])->name('show.tagupdate');
          Route::get('/tag-delete/{id}', [App\Http\Controllers\TagController::class , 'tagDelete'])->name('show.tagdelete');
 
+         //Post
+        Route::get('/post' , [App\Http\Controllers\PostController::class ,'Index'])->name('show.postpage');
+        Route::get('/post-create' , [App\Http\Controllers\PostController::class ,'postAdd'])->name('show.postadd');
+        Route::post('/post-create' , [App\Http\Controllers\PostController::class ,'postStore'])->name('show.poststore');
 
 
 

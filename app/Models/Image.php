@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Image extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
-    //Post Category
-    public function post()
+    public function imageable()
     {
-        return $this -> belongsToMany('App\Models\Post');
+        return $this -> morphTo();
     }
+
 
 }

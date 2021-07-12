@@ -15,7 +15,7 @@
                     <ul style="display: none;">
                         <li><a href="{{ route('show.categorypage') }}">Category</a></li>
                         <li><a href="{{ route('show.tagpage') }}">Tags</a></li>
-                        <li><a href="invoice-report.html">Posts</a></li>
+                        <li><a href="{{ route('show.postpage') }}">Posts</a></li>
                     </ul>
                 </li>
 
