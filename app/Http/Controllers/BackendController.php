@@ -8,6 +8,11 @@ class BackendController extends Controller
 {
     //Show login Page
 
+    public function __construct()
+    {
+        $this->middleware('guest')->except('adminPanel');
+    }
+
     public function adminLogin()
     {
         return view('backend.login-page');
