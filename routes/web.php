@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    //Backend  Routes
 
-Auth::routes();
+    Route::get('/admin-login' , [App\Http\Controllers\BackendController::class , 'adminLogin'])->name('show.loginpage');
+    Route::get('/admin-register' , [App\Http\Controllers\BackendController::class , 'adminRegister'])->name('show.registerpage');
+    Route::get('/admin-panel' , [App\Http\Controllers\BackendController::class , 'adminPanel'])->name('show.panelpage');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
