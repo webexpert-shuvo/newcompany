@@ -30,99 +30,99 @@
         <!-- /Page Header -->
 
         <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
+            <div class="col-xl-12 d-flex">
+                <div class="card flex-fill">
                     <div class="card-header">
-                        <h4 class="card-title">All Posts</h4>
-                        <br>
-                        <a href="" class="btn  btn-sm btn-success">Add New Post</a>
+                        <h4 class="card-title">Edit Post</h4>
+                        <a  class="btn btn-sm btn-success" href="{{ route('show.postpage') }}">All Posts</a>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Auth</th>
-                                        <th>Name</th>
-                                        <th>Slug</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
+
+                        @if (session('success'))
+                            <p class="alert alert-success">{{ session('success') }}<button class="close" data-dismiss="alert">&times;</button></p>
+                        @endif
+
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">Title</label>
+                                <div class="col-lg-9">
+                                    <input name="name" type="text" class="form-control" value="{{ $alldata -> name }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">Category</label>
+                                <div class="col-lg-9">
 
 
-                                </tbody>
-                            </table>
-                        </div>
+                                    @php
+                                        $post_cate = [];
+
+                                        foreach ($alldata -> category as $cat) {
+
+                                            array_push($post_cate , $cat -> name);
+
+                                        }
+                                    @endphp
+
+
+                                    <select class="selectdata form-control" name="cats[]" multiple="multiple">
+
+
+
+                                        {{-- @foreach ($post_cate  -> category as $catdaya)
+                                            <option value="{{ $catdaya -> id }}">{{ $catdaya -> name }}</option>
+                                        @endforeach --}}
+
+
+                                      </select>
+
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">Tag</label>
+                                <div class="col-lg-9">
+                                    <select class="selectdata form-control" name="tags[]" multiple="multiple">
+
+                                        {{-- @foreach ($tags as $tag)
+                                            <option value="{{ $tag -> id }}">{{ $tag -> name }}</option>
+                                        @endforeach --}}
+
+
+                                      </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">Featured Image</label>
+                                <div class="col-lg-9">
+                                    <input type="file" name="photo">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label">Content</label>
+                                <div class="col-lg-9">
+                                    <textarea name="content"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Add Post</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
         </div>
+
+
     </div>
 </div>
-
-    {{-- Category Add Modal Start  --}}
-    <div id="tag_add_modal" class="modal fade">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4>Add New Tag</h4>
-                    <button class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form action="" id="tag_add_form" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <input name="name" type="text" placeholder="Tag Name" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Add" class="btn btn-sm btn-success">
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- Tag Add Modal End  --}}
-
-    {{-- Tag Edit modal Start --}}
-
-    <div id="tag_edit_modal" class="modal fade">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4>Edit Tag</h4>
-                    <button class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form action="" id="tag_edit_form" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <input name="name" type="text" placeholder="Tag Name" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Update" class="btn btn-sm btn-success">
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- Category Edit modal End --}}
 
 
 

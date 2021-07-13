@@ -36,6 +36,11 @@
                         <h4 class="card-title">All Posts</h4>
                         <br>
                         <a href="{{ route('show.postadd') }}" class="btn  btn-sm btn-success">Add New Post</a>
+
+                        @if (session('success'))
+                            <p class="alert alert-success">{{ session('success') }}<button class="close" data-dismiss="alert">&times;</button></p>
+                        @endif
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -45,20 +50,37 @@
                                         <th>#</th>
                                         <th>Auth</th>
                                         <th>Name</th>
-                                        <th>Slug</th>
+                                        <th>Category</th>
+                                        <th>Tag</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
 
+                                    @foreach ($alldata as $data)
+                                        <tr>
+                                            <td>{{ $loop -> index + 1 }}</td>
+                                            <td>{{ $data -> user -> name }}</td>
+                                            <td>{{ $data -> name }}</td>
+                                            <td>
+                                                <ul>
+                                                    @foreach ($data -> category as $cats)
+                                                        <li>{{ $cats -> name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    @foreach ($data -> tag as $tags)
+                                                        <li>{{ $tags -> name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td><span class="badge badge-{{ ( $data -> status == 'Active') ? 'success' : 'danger' }}">{{ $data -> status }}</span></td>
+                                            <td><a href="{{ route('show.poststatus' , $data -> id) }}" class="btn btn-sm btn-{{ ( $data -> status == 'Active' ) ? 'dark' : 'success' }}"> <i class="fa fa-{{ ($data -> status == 'Active') ?  'eye-slash' : 'eye' }} "></i> </a> <a href="{{ route('show.postedit' , $data -> id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a> <a href="{{ route('show.postdelete' , $data -> id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -70,8 +92,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 

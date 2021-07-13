@@ -53,6 +53,9 @@ Auth::routes();
         Route::get('/post' , [App\Http\Controllers\PostController::class ,'Index'])->name('show.postpage');
         Route::get('/post-create' , [App\Http\Controllers\PostController::class ,'postAdd'])->name('show.postadd');
         Route::post('/post-create' , [App\Http\Controllers\PostController::class ,'postStore'])->name('show.poststore');
+        Route::get('/post-status/{id}' , [App\Http\Controllers\PostController::class ,'postStatus'])->name('show.poststatus');
+        Route::get('/post-edit/{id}' , [App\Http\Controllers\PostController::class ,'postEdit'])->name('show.postedit');
+        Route::get('/post-delete/{id}' , [App\Http\Controllers\PostController::class ,'postDelete'])->name('show.postdelete');
 
 
 

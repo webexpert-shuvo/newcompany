@@ -15,7 +15,12 @@ class PostController extends Controller
 
     public function Index()
     {
-        return view('backend.layouts.blog.post.index');
+        $alldetails = Post::latest()->get();
+        return view('backend.layouts.blog.post.index' , [
+
+            'alldata'       => $alldetails,
+
+        ]);
     }
 
 
@@ -64,6 +69,55 @@ class PostController extends Controller
         return redirect()->back()->with('success' , 'Post Insert Done');
 
     }
+
+    //Post status Update
+    public function postStatus(Request $request , $id)
+    {
+        $status_id = Post::find($id);
+
+        if ($status_id -> status == 'Active') {
+            $status_id -> status = 'Inactive';
+            $status_id -> update();
+        } else {
+            $status_id -> status = 'Active';
+            $status_id -> update();
+        }
+
+        return redirect()->back()->with('success' , 'Post Status Successful');
+    }
+
+    //Post Edit
+
+    public function postEdit(Request $request , $id)
+    {
+       $edit_id =  Post::find($id);
+
+       return view('backend.layouts.blog.post.post-edit' ,[
+
+            'alldata'       => $edit_id,
+
+       ]);
+
+
+    }
+
+
+
+    //Post Delete
+
+    public function postDelete(Request $request , $id)
+    {
+        $delete_id =  Post::find($id);
+        $delete_id -> delete();
+        $delete_id -> update();
+
+        return redirect()->back()->with('success' , 'Post Deleted Successful');
+
+    }
+
+
+
+
 
 
 }

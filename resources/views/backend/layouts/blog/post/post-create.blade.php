@@ -34,6 +34,8 @@
                 <div class="card flex-fill">
                     <div class="card-header">
                         <h4 class="card-title">Add New Post </h4>
+                        <a  class="btn btn-sm btn-success" href="{{ route('show.postpage') }}">All Posts</a>
+
                     </div>
                     <div class="card-body">
 
@@ -101,6 +103,8 @@
             </div>
 
         </div>
+
+
     </div>
 </div>
 
