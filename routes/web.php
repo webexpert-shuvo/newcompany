@@ -40,14 +40,14 @@ Auth::routes();
         Route::get('/category-delete/{id}', [App\Http\Controllers\CategoryController::class , 'categoryDelete'])->name('show.categorydelete');
 
          //Tag Route
-         Route::get('/tag', [App\Http\Controllers\TagController::class , 'Index'])->name('show.tagpage');
-         Route::post('/tag', [App\Http\Controllers\TagController::class , 'tagStore'])->name('show.tagstore');
-         Route::post('/tag', [App\Http\Controllers\TagController::class , 'tagStore'])->name('show.tagstore');
-         Route::get('/tag-all', [App\Http\Controllers\TagController::class , 'tagAll'])->name('show.tagall');
-         Route::get('/tag-status/{id}', [App\Http\Controllers\TagController::class , 'tagStatus'])->name('show.tagstatus');
-         Route::get('/tag-edit/{id}', [App\Http\Controllers\TagController::class , 'tagEdit'])->name('show.tagedit');
-         Route::post('/tag-edit/{id}', [App\Http\Controllers\TagController::class , 'tagUpdate'])->name('show.tagupdate');
-         Route::get('/tag-delete/{id}', [App\Http\Controllers\TagController::class , 'tagDelete'])->name('show.tagdelete');
+        Route::get('/tag', [App\Http\Controllers\TagController::class , 'Index'])->name('show.tagpage');
+        Route::post('/tag', [App\Http\Controllers\TagController::class , 'tagStore'])->name('show.tagstore');
+        Route::post('/tag', [App\Http\Controllers\TagController::class , 'tagStore'])->name('show.tagstore');
+        Route::get('/tag-all', [App\Http\Controllers\TagController::class , 'tagAll'])->name('show.tagall');
+        Route::get('/tag-status/{id}', [App\Http\Controllers\TagController::class , 'tagStatus'])->name('show.tagstatus');
+        Route::get('/tag-edit/{id}', [App\Http\Controllers\TagController::class , 'tagEdit'])->name('show.tagedit');
+        Route::post('/tag-edit/{id}', [App\Http\Controllers\TagController::class , 'tagUpdate'])->name('show.tagupdate');
+        Route::get('/tag-delete/{id}', [App\Http\Controllers\TagController::class , 'tagDelete'])->name('show.tagdelete');
 
          //Post
         Route::get('/post' , [App\Http\Controllers\PostController::class ,'Index'])->name('show.postpage');
@@ -58,9 +58,15 @@ Auth::routes();
         Route::get('/post-delete/{id}' , [App\Http\Controllers\PostController::class ,'postDelete'])->name('show.postdelete');
 
 
-
-
     });
 
+
+
+    //Front End Route
+
+    Route::get('/home' , [App\Http\Controllers\CompanyController::class , 'Index'])->name('show.home.company');
+    Route::get('/blog' , [App\Http\Controllers\BlogController::class , 'Index'])->name('show.blog.company');
+    Route::get('/blog/{slug}' , [App\Http\Controllers\BlogController::class , 'singlePost'])->name('show.blog.single');
+    Route::post('/blog/search' , [App\Http\Controllers\BlogController::class , 'postSearch'])->name('show.blog.search');
 
 
