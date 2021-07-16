@@ -54,5 +54,28 @@ class BlogController extends Controller
 
 
 
+    //Category Post Search
+
+    public function categoryPostSearch(Request $request , $slug)
+    {
+
+        $catePostSearch = Post::where('slug', $slug )->latest()->get();
+
+        return view('company.blog-category-search' ,  [
+
+            'posts'  => $catePostSearch,
+
+        ]);
+
+
+
+    }
+
+
+
+
+
+
+
 
 }

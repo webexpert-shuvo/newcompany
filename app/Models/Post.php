@@ -24,12 +24,24 @@ class Post extends Model
         return $this -> belongsToMany('App\Models\Category');
     }
 
+
+
+
     //Tag
 
     public function tag()
     {
         return $this -> belongsToMany('App\Models\Tag');
     }
+
+
+    // get all comment
+    public function comment()
+    {
+        return $this -> hasMany('App\Models\Comment');
+    }
+
+
 
 
 

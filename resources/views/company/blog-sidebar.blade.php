@@ -16,11 +16,12 @@
       <div class="sidebar-item categories">
         <ul>
             @php
+
                 $allcate = App\Models\Category::where('status','Active')->latest()->get();
-                $catecount = App\Models\Category::where('status','Active')->latest()->get()->count();
+
             @endphp
             @foreach ($allcate as $cats)
-                <li><a href="#">{{ $cats -> name }}</a></li>
+                <li><a href="{{ route('blog.category.search' , $cats -> slug) }}">{{ $cats -> name }} ({{$cats -> post -> count()}})</a></li>
             @endforeach
         </ul>
 

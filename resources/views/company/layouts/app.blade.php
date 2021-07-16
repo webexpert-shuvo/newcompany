@@ -87,6 +87,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('company/assets/js/main.js') }}"></script>
+  <script src="{{ asset('company/assets/js/custom.js') }}"></script>
 
 </body>
 

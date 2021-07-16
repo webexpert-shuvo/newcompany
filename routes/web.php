@@ -58,6 +58,20 @@ Auth::routes();
         Route::get('/post-delete/{id}' , [App\Http\Controllers\PostController::class ,'postDelete'])->name('show.postdelete');
 
 
+        //Product Category
+
+        Route::get('/product-category' , [App\Http\Controllers\ProCategoryController::class, 'Index']  )->name('show.product.category');
+        Route::post('/product-category' , [App\Http\Controllers\ProCategoryController::class, 'proCateAdd']  )->name('show.product.category.store');
+
+
+        //Product Tag
+        Route::get('/product-tag' , [App\Http\Controllers\ProTagController::class, 'Index'])->name('show.pro.tag');
+        Route::post('/product-tag' , [App\Http\Controllers\ProTagController::class, 'proTagStore'])->name('show.pro.tag.store');
+        Route::get('/product-tag-delete/{id}' , [App\Http\Controllers\ProTagController::class, 'proTagDelete'])->name('show.pro.tag.delete');
+        Route::get('/product-tag-edit/{id}' , [App\Http\Controllers\ProTagController::class, 'proTagEdit'])->name('show.pro.tag.edit');
+        Route::post('/product-tag-update/{id}' , [App\Http\Controllers\ProTagController::class, 'proTagUpdate'])->name('show.pro.tag.update');
+
+
     });
 
 
@@ -68,5 +82,6 @@ Auth::routes();
     Route::get('/blog' , [App\Http\Controllers\BlogController::class , 'Index'])->name('show.blog.company');
     Route::get('/blog/{slug}' , [App\Http\Controllers\BlogController::class , 'singlePost'])->name('show.blog.single');
     Route::post('/blog/search' , [App\Http\Controllers\BlogController::class , 'postSearch'])->name('show.blog.search');
-
+    Route::post('/blog/comment' , [App\Http\Controllers\CommentController::class , 'postComment'])->name('show.blog.comment');
+    Route::get('post/category/{slug}' , [App\Http\Controllers\BlogController::class , 'categoryPostSearch'])->name('blog.category.search');
 

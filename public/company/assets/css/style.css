@@ -2242,3 +2242,7 @@ section {
   color: #fff;
   text-decoration: none;
 }
+.replay_box{
+
+    display: none;
+}

@@ -310,10 +310,269 @@
 
         });
 
+        //Product Cateogry add
+
+        $(document).on('click','a.add_procate_btn',function(e){
+            e.preventDefault();
+           $('#procat_add_modal').modal('show');
+        });
+
+
+        $('form#procat_add_form').submit(function(e){
+            e.preventDefault();
+
+            $.ajax({
+
+                url : '/product-category',
+                method: "POST",
+                data : new FormData(this),
+                contentType : false,
+                processData: false,
+                success : function(data){
+                    $('form#procat_add_form')[0].reset();
+                    $('#procat_add_modal').modal('hide');
+                    swal({
+                        title: "Success!",
+                        text: "Product Category Insert Successful",
+                        icon: "success",
+                        button: "Done!",
+                    });
+                    $('#procatetabel').DataTable().ajax.reload();
+
+
+                }
+            });
+
+
+        });
+
+        //Product Category DataTable
+        $('#procatetabel').DataTable({
+
+            processing : true,
+            serverSide : true,
+            ajax : {
+                url : '/product-category',
+            },
+            columns : [
+
+                {
+                    data : 'id',
+                    name : '#',
+                },
+                {
+                    data : 'name',
+                    name : 'name',
+
+                },
+                {
+                    data : 'slug',
+                    name : 'slug',
+
+                },
+                {
+                    data : 'photo',
+                    name : 'photo',
+                    render : function(data, type, full , meta){
+
+                        return '<img style="height:80px;" src="backend/assets/img/product/category/'+data+'" />';
+
+                    }
+                },
+                {
+                    data : 'status',
+                    name : 'status',
+                    render : function(data,type,full, meta){
+
+                        return `<div class="status-toggle">
+                                    <input type="checkbox" id="status_${full.id}"   ${ ( full.status == 1  ? 'checked="checked"': '')  }   class="check" >
+                                    <label for="status_${full.id}" class="checktoggle">checkbox</label>
+                                </div>`;
+                    }
+                },
+                {
+                    data : 'action',
+                    name : 'action',
+                }
+
+            ],
+
+
+        });
+
+        //Product Tag DataTable
+
+        $(document).on('click','a.add_protag_btn',function(e){
+            e.preventDefault();
+
+            $('#protag_add_modal').modal('show');
+
+        });
+
+        $('form#protag_add_form').submit(function(e){
+            e.preventDefault();
+
+            $.ajax({
+
+                url : 'product-tag',
+                method : "POST",
+                data : new FormData(this),
+                contentType : false,
+                processData : false,
+                success : function(data){
+                    $('form#protag_add_form')[0].reset();
+                    $('#protag_add_modal').modal('hide');
+                    swal({
+                        title: "Success!",
+                        text: "Product Tag Insert Successful",
+                        icon: "success",
+                        button: "Done!",
+                    });
+                    $('#protagtabel').DataTable().ajax.reload();
+
+
+                }
+
+            });
+
+
+
+        });
+
+        $('#protagtabel').DataTable({
+
+            processing : true,
+            serverSide : true,
+            ajax : {
+                url : '/product-tag',
+            },
+            columns : [
+
+                {
+                    data : 'id',
+                    name : 'name',
+                },
+                {
+                    data : 'name',
+                    name : 'name',
+                },
+                {
+                    data : 'slug',
+                    name : 'slug',
+                },
+                {
+                    data : 'status',
+                    name : 'status',
+                    render : function(data,type,full, meta){
+
+                        return `<div class="status-toggle">
+                                    <input type="checkbox"  tag_status_id="${full.id}" ${( data == 'Active' ? 'checked = "checked"' : '' )} id="status_${full.id}" class="check pro_tag_status">
+                                    <label for="status_${full.id}" class="checktoggle">checkbox</label>
+                                    </div>`;
+
+                    }
+                },
+                {
+
+                    data : 'action',
+                    name : 'action'
+
+                }
+
+            ],
+
+        });
+
+        //Product tag Delete
+
+        $(document).on('click','a.protag_delete',function(e){
+            e.preventDefault();
+
+            let protagdelete_id = $(this).attr('pro_tagdelete_id');
+
+            $.ajax({
+
+                url : '/product-tag-delete/'+protagdelete_id,
+                success : function(data){
+
+                    swal({
+                        title: "Success!",
+                        text: "Product Tag Delete Successful",
+                        icon: "success",
+                        button: "Done!",
+                    });
+
+                    $('#protagtabel').DataTable().ajax.reload();
+
+                }
+
+            });
+
+
+        });
+
+        //Product tag Edit
+
+        $(document).on('click','a.protag_edit',function(e){
+            e.preventDefault();
+
+            let protagedit_id = $(this).attr('pro_tag_id');
+
+            $.ajax({
+
+                url : '/product-tag-edit/'+protagedit_id,
+                success : function(data){
+
+                  $('#protag_edit_modal').modal('show');
+                  $('form#protag_edit_form input[name="name"]').val(data.name);
+
+                }
+
+            });
+
+            $('form#protag_edit_form').submit(function(e){
+                e.preventDefault()
+                $.ajax({
+
+                    url : '/product-tag-update/'+protagedit_id,
+                    data  : new FormData(this),
+                    method: "POST",
+                    contentType: false,
+                    processData: false,
+                    success : function(data){
+                        $('#protag_edit_modal').modal('hide');
+                        swal({
+                            title: "Success!",
+                            text: "Product Tag Updated Successful",
+                            icon: "success",
+                            button: "Done!",
+                        });
+
+                        $('#protagtabel').DataTable().ajax.reload();
+                    }
+
+                });
+
+            });
+
+
+        });
+
+
+
+
+
+
+
+
+
+
 
 
         CKEDITOR.replace( 'content' );
         $('.selectdata').select2();
+
+
 
 
 
